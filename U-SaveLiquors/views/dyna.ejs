@@ -1,0 +1,14 @@
+<h2>About Books</h2>
+
+<% for(let i = 0; i < books.length; i++) { %>
+        
+        <product>
+
+        <h3><%= books[i].title %></h3>
+
+        <p><%= books[i].author %></p>
+
+	<p><%= books[i].publishedAt %></p>
+        </product>
+    <% } %>
+ 
