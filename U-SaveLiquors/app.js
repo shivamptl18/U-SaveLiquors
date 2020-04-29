@@ -4,14 +4,41 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var layouts = require('express-ejs-layouts');
+const mariadb = require('mariadb/callback');
+const db = mariadb.createConnection({host: 'eagle.cdm.depaul.edu',
+user: 'spate313', password: 'spate313', 
+database: 'usavedb'});
+
+// connect to database
+db.connect((err) => {
+  if (err) {
+console.log("Unable to connect to database due to error: " + err);
+	res.render('error');
+  } else
+	{
+    console.log("Connected to DB");
+  }
+});
+global.db = db;
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var aboutRouter = require('./routes/about');
 var contactRounter = require('./routes/contact');
-var dynaRouter = require('./routes/dyna');
 var helpRouter = require('./routes/help');
 var privacyRouter = require('./routes/privacy');
+var productRouter = require('./routes/product');
+var categoryRouter = require('./routes/category');
+var customerRouter = require('./routes/customer');
+//var supplierRouter = require('./routes/supplier');
+//var orderdetailRouter = require('./routes/orderdetail');
+//var saleorderRouter = require('./routes/saleorder');
+//var reviewRouter = require('./routes/review');
+//var subscriptionRouter = require('./routes/subscription');
+
+
 
 var app = express();
 
@@ -30,9 +57,19 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/about', aboutRouter);
 app.use('/contact', contactRounter);
-app.use('/dyna', dynaRouter);
 app.use('/help', helpRouter);
 app.use('/privacy', privacyRouter);
+app.use('/product', productRouter);
+app.use('/category', categoryRouter);
+app.use('/customer', customerRouter);
+//app.use('/supplier', supplierRouter);
+//app.use('/orderdetail', orderdetailRouter);
+//app.use('/saleorder', saleorderRouter);
+//app.use('/review', reviewRouter);
+//app.use('/subscription', subscriptionRouter);
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
