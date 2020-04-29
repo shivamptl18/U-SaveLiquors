@@ -1,0 +1,11 @@
+<h1> Edit Supplier</h1>
+<form action="/supplier/save" method="post">
+   <input type="hidden" name="supplier_id" value="<%= rec.supplier_id %>" >
+   <table>
+<tr> <td> Company Name: </td> <td> <input type="text" name="companyname" value=<%= rec.companyname %> required> </td> </tr>
+<tr> <td> Point Of Contact: </td> <td> <input type="text" name="pointofcontact" value=<%= rec.pointofcontact %> required> </td> </tr>
+<tr> <td> Website: </td> <td> <input type="text" name="website" value=<%= rec.website %> required> </td> </tr>
+<tr> <td> Phone: </td> <td> <input type="text" name="phone" value=<%= rec.phone %> required> </td> </tr>
+   </table>
+   <button type="submit">Save</button>
+</form>

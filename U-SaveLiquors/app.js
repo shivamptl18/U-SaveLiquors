@@ -32,11 +32,10 @@ var privacyRouter = require('./routes/privacy');
 var productRouter = require('./routes/product');
 var categoryRouter = require('./routes/category');
 var customerRouter = require('./routes/customer');
-//var supplierRouter = require('./routes/supplier');
-//var orderdetailRouter = require('./routes/orderdetail');
-//var saleorderRouter = require('./routes/saleorder');
-//var reviewRouter = require('./routes/review');
-//var subscriptionRouter = require('./routes/subscription');
+var supplierRouter = require('./routes/supplier');
+var orderdetailRouter = require('./routes/orderdetail');
+var saleorderRouter = require('./routes/saleorder');
+var subscriptionRouter = require('./routes/subscription');
 
 
 
@@ -62,11 +61,10 @@ app.use('/privacy', privacyRouter);
 app.use('/product', productRouter);
 app.use('/category', categoryRouter);
 app.use('/customer', customerRouter);
-//app.use('/supplier', supplierRouter);
-//app.use('/orderdetail', orderdetailRouter);
-//app.use('/saleorder', saleorderRouter);
-//app.use('/review', reviewRouter);
-//app.use('/subscription', subscriptionRouter);
+app.use('/supplier', supplierRouter);
+app.use('/orderdetail', orderdetailRouter);
+app.use('/saleorder', saleorderRouter);
+app.use('/subscription', subscriptionRouter);
 
 
 

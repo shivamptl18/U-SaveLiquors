@@ -5,7 +5,7 @@ var router = express.Router();
 // Route to show empty form to obtain input form end-user.
 // ==================================================
 router.get('/addrecord', function(req, res, next) {
-	res.render('customer/addrec');
+	res.render('saleorder/addrec');
 });
 
 // ==================================================
@@ -13,7 +13,7 @@ router.get('/addrecord', function(req, res, next) {
 // ==================================================
 
 router.get('/', function(req, res, next) {
-let query = "SELECT customer_id, firstname, lastname, email, phone, username, password FROM customer"; 
+let query = "SELECT order_id, customer_id, saledate, customernotes, paymentstatus FROM saleorder"; 
 
   // execute query
   db.query(query, (err, result) => {
@@ -21,7 +21,7 @@ let query = "SELECT customer_id, firstname, lastname, email, phone, username, pa
 			console.log(err);
 			res.render('error');
 		}
-	res.render('customer/allrecords', {allrecs: result });
+	res.render('saleorder/allrecords', {allrecs: result });
  	});
 });
 
@@ -29,7 +29,7 @@ let query = "SELECT customer_id, firstname, lastname, email, phone, username, pa
 // Route to view one specific record. Notice the view is one record
 // ==================================================
 router.get('/:recordid', function(req, res, next) {
-    let query = "SELECT customer_id, firstname,lastname, email, phone, address1, address2, city, state, zip, addlnotes, username, password FROM customer WHERE customer_id = " + req.params.recordid; 
+    let query = "SELECT order_id, customer_id, saledate, customernotes, paymentstatus FROM saleorder WHERE order_id = " + req.params.recordid; 
     
     // execute query
     db.query(query, (err, result) => {
@@ -37,7 +37,7 @@ router.get('/:recordid', function(req, res, next) {
             console.log(err);
             res.render('error');
         } else {
-            res.render('customer/onerec', {onerec: result[0] });
+            res.render('saleorder/onerec', {onerec: result[0] });
         } 
     });
 });
@@ -47,14 +47,14 @@ router.get('/:recordid', function(req, res, next) {
 // ==================================================
 router.post('/', function(req, res, next) {
 
-    let insertquery = "INSERT INTO customer (firstname, lastname, email, phone, address1, address2, city, state, zip, addlnotes, username, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+    let insertquery = "INSERT INTO saleorder (customer_id, saledate, customernotes, paymentstatus) VALUES (?, ?, ?, ?)"; 
     
-    db.query(insertquery,[req.body.firstname, req.body.lastname, req.body.email, req.body.phone,req.body.address1,req.body.address2,req.body.city, req.body.state, req.body.zip,req.body.addlnotes, req.body.username, req.body.password],(err, result) => {
+    db.query(insertquery,[req.body.customer_id, req.body.saledate, req.body.customernotes, req.body.paymentstatus],(err, result) => {
         if (err) {
                 console.log(err);
                 res.render('error');
                 } else {
-                res.redirect('/customer');
+                res.redirect('/saleorder');
                 }
             });
     });
@@ -64,7 +64,7 @@ router.post('/', function(req, res, next) {
 // Route to edit one specific record.
 // ==================================================
 router.get('/:recordid/edit', function(req, res, next) {
-    let query = "SELECT customer_id, firstname, lastname, email, phone,username, password FROM customer WHERE customer_id = " + req.params.recordid;  
+    let query = "SELECT order_id, customer_id, saledate, customernotes, paymentstatus FROM saleorder WHERE order_id = " + req.params.recordid;  
     
       // execute query
       db.query(query, (err, result) => {
@@ -72,7 +72,7 @@ router.get('/:recordid/edit', function(req, res, next) {
                 console.log(err);
                 res.render('error');
             } else {
-                res.render('customer/editrec', {rec: result[0] });
+                res.render('saleorder/editrec', {rec: result[0] });
             } 
          });
     });
@@ -82,15 +82,15 @@ router.get('/:recordid/edit', function(req, res, next) {
 // Route to save edited data in database.
 // ==================================================
 router.post('/save', function(req, res, next) {
-	let updatequery = "UPDATE customer SET firstname = ?, lastname = ?, email = ?, phone = ?,  username = ?, password = ? WHERE customer_id = " + req.body.customer_id; 
+	let updatequery = "UPDATE saleorder SET customer_id = ?, saledate = ?, customernotes = ?, paymentstatus = ? WHERE order_id = " + req.body.order_id; 
 
 
-	db.query(updatequery,[req.body.firstname, req.body.lastname, req.body.email, req.body.phone,  req.body.username, req.body.password],(err, result) => {
+	db.query(updatequery,[req.body.order_id, req.body.product_id, req.body.saleprice, req.body.qty],(err, result) => {
 		if (err) {
 			console.log(err);
 			res.render('error');
 		} else {
-			res.redirect('/customer');
+			res.redirect('/saleorder');
 		}
 		});
 });
@@ -100,7 +100,7 @@ router.post('/save', function(req, res, next) {
 // Route to delete one specific record.
 // ==================================================
 router.get('/:recordid/delete', function(req, res, next) {
-    let query = "DELETE FROM customer WHERE customer_id = " + req.params.recordid;  
+    let query = "DELETE FROM saleorder WHERE order_id = " + req.params.recordid;  
     
       // execute query
       db.query(query, (err, result) => {
@@ -108,7 +108,7 @@ router.get('/:recordid/delete', function(req, res, next) {
                 console.log(err);
                 res.render('error');
             } else {
-                res.redirect('/customer');
+                res.redirect('/saleorder');
             } 
          });
     });
