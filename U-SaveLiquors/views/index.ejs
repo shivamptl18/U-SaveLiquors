@@ -1,26 +1,40 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    
-  
-  </head>
-  <body>
-    
-    <h1>Welcome To U-Save Liquor Mart!</h1>
-    <p>Your One stop shop that covers all of your beverage needs!</p>
-    <p>Choose from our wide ranged selection! </p>
-    <br>
-    <p>At U-Save we are all about customer service to which we give back to our customer 
-      by giving them an opportunity to earn 2% back in points for any item purchased at 
-      our store as well as $2.30 off for any name brand Cigarettes if they download our 
-      JMSC Loyalty app available in both App Store and Google Play Store. Here at U-Save 
-      we make sure our customers are treated fairly!</p>
+<h1>Welcome To U-Save Liquor Mart!</h1>
+<p>Your One stop shop that covers all of your beverage needs!</p>
+<p>Choose from our wide ranged selection! </p>
+ 
 
-  </body>
+
+
+
+<% if (allrecs.length > 0) {%>
+  <% allrecs.forEach((recref, index) => { %>
+    <product>
+      <table> 
+      <tr>
+        <td><%= recref.productname %></td>
+        <td><%= recref.saleprice %></td>
+      </tr>
+      <tr>
+        <td><%= recref.productimage %></td>
+        <td><%= recref.productstatus %></td>
+      </tr>
+      <tr>
+        <td><%= recref.startingcity %></td>
+        <td><%= recref.destinationcity %></td>
+      </tr>
+      </table>
+          </product>
+      <% }); %>
+<% } %>
+
+      
+    
+       
   
-</html>
+
+  
+  
+
 
 
 

@@ -13,7 +13,7 @@ router.get('/addrecord', function(req, res, next) {
 // ==================================================
 
 router.get('/', function(req, res, next) {
-let query = "SELECT product_id, productname, productimage, productstatus, saleprice, startingcity, destinationcity FROM product"; 
+let query = "SELECT product_id, productname, homepage, productimage, productstatus, saleprice, startingcity, destinationcity FROM product"; 
 
   // execute query
   db.query(query, (err, result) => {
@@ -29,7 +29,7 @@ let query = "SELECT product_id, productname, productimage, productstatus, salepr
 // Route to view one specific record. Notice the view is one record
 // ==================================================
 router.get('/:recordid', function(req, res, next) {
-    let query = "SELECT product_id, productname, productimage, item_description, category_id, supplier_id, subcategory_1, subcategory_2, productstatus, saleprice, startingcity, destinationcity, productduration FROM product WHERE product_id = " + req.params.recordid; 
+    let query = "SELECT product_id, productname, homepage, productimage, item_description, category_id, supplier_id, subcategory_1, subcategory_2, productstatus, saleprice, startingcity, destinationcity, productduration FROM product WHERE product_id = " + req.params.recordid; 
     
     // execute query
     db.query(query, (err, result) => {
@@ -47,9 +47,9 @@ router.get('/:recordid', function(req, res, next) {
 // ==================================================
 router.post('/', function(req, res, next) {
 
-    let insertquery = "INSERT INTO product (productname, productimage, item_description, category_id, supplier_id, subcategory_1, subcategory_2, productstatus, saleprice, startingcity, destinationcity, productduration) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+    let insertquery = "INSERT INTO product (productname, productimage, item_description, category_id, supplier_id, subcategory_1, subcategory_2, productstatus, saleprice, startingcity, destinationcity, productduration, homepage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"; 
     
-    db.query(insertquery,[req.body.productname, req.body.productimage, req.body.item_description, req.body.category_id, req.body.supplier_id, req.body.subcategory_1, req.body.subcategory_2, req.body.productstatus, req.body.saleprice, req.body.startingcity, req.body.destinationcity, req.body.productduration],(err, result) => {
+    db.query(insertquery,[req.body.productname, req.body.productimage, req.body.item_description, req.body.category_id, req.body.supplier_id, req.body.subcategory_1, req.body.subcategory_2, req.body.productstatus, req.body.saleprice, req.body.startingcity, req.body.destinationcity, req.body.productduration, req.body.homepage],(err, result) => {
         if (err) {
                 console.log(err);
                 res.render('error');
@@ -64,7 +64,7 @@ router.post('/', function(req, res, next) {
 // Route to edit one specific record.
 // ==================================================
 router.get('/:recordid/edit', function(req, res, next) {
-    let query = "SELECT product_id, productname, productimage, item_description, category_id, supplier_id, subcategory_1, subcategory_2, productstatus, saleprice, startingcity, destinationcity, productduration FROM product WHERE product_id = " + req.params.recordid;  
+    let query = "SELECT product_id, productname, homepage, productimage, item_description, category_id, supplier_id, subcategory_1, subcategory_2, productstatus, saleprice, startingcity, destinationcity, productduration FROM product WHERE product_id = " + req.params.recordid;  
     
       // execute query
       db.query(query, (err, result) => {
@@ -82,10 +82,10 @@ router.get('/:recordid/edit', function(req, res, next) {
 // Route to save edited data in database.
 // ==================================================
 router.post('/save', function(req, res, next) {
-	let updatequery = "UPDATE product SET productname = ?, productimage = ?, item_description = ?, category_id = ?, supplier_id = ?, subcategory_1 = ?, subcategory_2 = ?, productstatus = ?, saleprice = ?, startingcity = ?, destinationcity = ?, productduration = ? WHERE product_id = " + req.body.product_id; 
+	let updatequery = "UPDATE product SET productname = ?, productimage = ?, item_description = ?, category_id = ?, supplier_id = ?, subcategory_1 = ?, subcategory_2 = ?, productstatus = ?, saleprice = ?, startingcity = ?, destinationcity = ?, productduration = ?, homepage = ? WHERE product_id = " + req.body.product_id; 
 
 
-	db.query(updatequery,[req.body.productname, req.body.productimage, req.body.item_description, req.body.category_id, req.body.supplier_id, req.body.subcategory_1, req.body.subcategory_2, req.body.productstatus, req.body.saleprice, req.body.startingcity, req.body.destinationcity, req.body.productduration],(err, result) => {
+	db.query(updatequery,[req.body.productname, req.body.productimage, req.body.item_description, req.body.category_id, req.body.supplier_id, req.body.subcategory_1, req.body.subcategory_2, req.body.productstatus, req.body.saleprice, req.body.startingcity, req.body.destinationcity, req.body.productduration, req.body.homepage],(err, result) => {
 		if (err) {
 			console.log(err);
 			res.render('error');
