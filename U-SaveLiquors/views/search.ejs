@@ -1,0 +1,39 @@
+<form action="/search" method="post">
+	<h1>Search</h1>	
+	<input type="text" name="searchcriteria">
+	<input type="submit" value="Go">
+</form>
+
+<hr>
+
+<% if (allrecs.length > 0) {%>
+		<table border=1>
+			<tr>
+				<th>Product ID</th>
+				<th>Product Name</th>
+				<th>Product Image</th>
+				<th>Product Status</th>
+				<th>Sale Price </th>
+				<th>Starting City</th>
+				<th>Destination City</th>
+			</tr>
+      	<% allrecs.forEach((recref, index) => { %>
+			<tr>
+				<td><%= recref.product_id %></td>
+				<td><%= recref.productname %></td>
+				<td><%= recref.productimage %></td>
+				<td><%= recref.productstatus %></td>
+				<td><%= recref.saleprice %></td>
+				<td><%= recref.startingcity %></td>
+				<td><%= recref.destinationcity %></td>
+				<td><a href='/product/<%= recref.product_id %>'> Details</a></td>
+                </tr>
+        <% }); %>
+		</table>
+
+        <% } else { %>
+            <p>Not Records Available</p>
+        <% } %>
+		
+
+

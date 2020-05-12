@@ -2,10 +2,21 @@
 <form action="/product/save" method="post">
    <input type="hidden" name="product_id" value="<%= rec.product_id %>" >
    <table>
-<tr> <td> Product Name: </td> <td> <input type="text" name="productname" value=<%= rec.productname %> required> </td> </tr>
+<tr> <td> Product Name: </td> <td> <input type="text" name="productname" value="<%= rec.productname %>" required> </td> </tr>
 <tr> <td> Image: </td> <td> <input type="text" name="productimage" value=<%= rec.productimage %> required>  </td> </tr>
 <tr> <td> Description: </td> <td> <textarea name="item_description" rows="10" cols="30"><%= rec.item_description %> </textarea> </td> </tr>
-<tr> <td> Category ID: </td> <td> <input type="number" name="category_id" value=<%= rec.category_id %> required> </td> </tr>
+<tr> <td> Category ID: </td> <td> 
+            <select name="category_id" required>
+                        <% for (var i = 0; i < category.length; i++) { %>
+                              <% if (category[i].category_id == rec.category_id) { %>
+                                          <option selected value=<%= category[i].category_id %>>
+                                          <%= category[i].categoryname %></option>
+                              <% } else { %>
+                                          <option value=<%= category[i].category_id %>> 
+                                                <%= category[i].categoryname %></option>
+                              <% } }%>
+            </select>
+                              </td> </tr>
 <tr> <td> Supplier ID: </td> <td> <input type="number" name="supplier_id" value=<%= rec.supplier_id %> required> </td> </tr>
 <tr> <td> Sub Category 1: </td> <td> <input type="text" name="subcategory_1" value=<%= rec.subcategory_1 %> required> </td> </tr>
 <tr> <td> Sub Category 2: </td> <td> <input type="text" name="subcategory_2" value=<%= rec.subcategory_2 %> required> </td> </tr>
@@ -15,13 +26,21 @@
                         <option>Discontinued</option>
                         <option>Limited Qty</option>
                         <option>On Order</option>
-				        <option>Out of Stock</option>
+				            <option>Out of Stock</option>
                     </select> </td> </tr>
 <tr> <td> Sale Price: </td> <td> <input type="text" name="saleprice" value=<%= rec.saleprice %> required> </td> </tr>
-<tr> <td> Starting City: </td> <td> <input type="text" name="startingcity" value=<%= rec.startingcity %> required> </td> </tr>
-<tr> <td> Destination City: </td> <td> <input type="text" name="destinationcity" value=<%= rec.destinationcity %> required> </td> </tr>
+<tr> <td> Starting City: </td> <td> <input type="text" name="startingcity" value="<%= rec.startingcity %>" required> </td> </tr>
+<tr> <td> Destination City: </td> <td> <input type="text" name="destinationcity" value="<%= rec.destinationcity %>" required> </td> </tr>
 <tr> <td> Duration: </td> <td> <input type="text" name="productduration" value=<%= rec.productduration %> required> </td> </tr>
-<tr> <td> Home Page Display: </td> <td> <input type="checkbox" name="homepage" value=<%= rec.homepage %> required> </td> </tr>
+
+
+<% if (rec.homepage == 1) { %> 
+   <tr> <td> Home Page Display: </td> <td> <input type="checkbox", name="homepage", checked="true", value="true" > </td> </tr>
+<% } else  { %>
+      <tr> <td> Home Page Display: </td> <td> <input type="checkbox", name="homepage", value="false" > </td> </tr>
+<% } %>
+   
+
 
    </table>
    <button type="submit">Save</button>

@@ -5,8 +5,18 @@ var router = express.Router();
 // Route to show empty form to obtain input form end-user.
 // ==================================================
 router.get('/addrecord', function(req, res, next) {
-	res.render('product/addrec');
+    let query = "SELECT category_id, categoryname FROM category"; 
+	// execute query
+	db.query(query, (err, result) => {
+		if (err) {
+			console.log(err);
+			res.render('error');
+		}
+		res.render('product/addrec', {category: result});
+ 	});
 });
+
+
 
 // ==================================================
 // Route to list all records. Display view to list all records
@@ -48,8 +58,16 @@ router.get('/:recordid', function(req, res, next) {
 router.post('/', function(req, res, next) {
 
     let insertquery = "INSERT INTO product (productname, productimage, item_description, category_id, supplier_id, subcategory_1, subcategory_2, productstatus, saleprice, startingcity, destinationcity, productduration, homepage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"; 
+
+    var homepagechecked = false;
+    if (req.body.homepage) {
+        homepagechecked = true;
+    } else {
+        homepagechecked = false;
+    }
+
     
-    db.query(insertquery,[req.body.productname, req.body.productimage, req.body.item_description, req.body.category_id, req.body.supplier_id, req.body.subcategory_1, req.body.subcategory_2, req.body.productstatus, req.body.saleprice, req.body.startingcity, req.body.destinationcity, req.body.productduration, req.body.homepage],(err, result) => {
+    db.query(insertquery,[req.body.productname, req.body.productimage, req.body.item_description, req.body.category_id, req.body.supplier_id, req.body.subcategory_1, req.body.subcategory_2, req.body.productstatus, req.body.saleprice, req.body.startingcity, req.body.destinationcity, req.body.productduration, homepagechecked],(err, result) => {
         if (err) {
                 console.log(err);
                 res.render('error');
@@ -72,20 +90,37 @@ router.get('/:recordid/edit', function(req, res, next) {
                 console.log(err);
                 res.render('error');
             } else {
-                res.render('product/editrec', {rec: result[0] });
-            } 
-         });
-    });
-    
+         
+			let query = "SELECT category_id, categoryname FROM category"; 
+			// execute query
+			db.query(query, (err, cats) => {
+				if (err) {
+					console.log(err);
+					res.render('error');
+				}
+				res.render('product/editrec', {rec: result[0], category: cats});
+			});
+		} 
+ 	});
+});
+
 
 // ==================================================
 // Route to save edited data in database.
 // ==================================================
 router.post('/save', function(req, res, next) {
-	let updatequery = "UPDATE product SET productname = ?, productimage = ?, item_description = ?, category_id = ?, supplier_id = ?, subcategory_1 = ?, subcategory_2 = ?, productstatus = ?, saleprice = ?, startingcity = ?, destinationcity = ?, productduration = ?, homepage = ? WHERE product_id = " + req.body.product_id; 
+    let updatequery = "UPDATE product SET productname = ?, productimage = ?, item_description = ?, category_id = ?, supplier_id = ?, subcategory_1 = ?, subcategory_2 = ?, productstatus = ?, saleprice = ?, startingcity = ?, destinationcity = ?, productduration = ?, homepage = ? WHERE product_id = " + req.body.product_id; 
+    
+    var homepagechecked = false;
+    if (req.body.homepage) {
+        homepagechecked = true;
+    } else {
+        homepagechecked = false;
+    }
 
 
-	db.query(updatequery,[req.body.productname, req.body.productimage, req.body.item_description, req.body.category_id, req.body.supplier_id, req.body.subcategory_1, req.body.subcategory_2, req.body.productstatus, req.body.saleprice, req.body.startingcity, req.body.destinationcity, req.body.productduration, req.body.homepage],(err, result) => {
+
+	db.query(updatequery,[req.body.productname, req.body.productimage, req.body.item_description, req.body.category_id, req.body.supplier_id, req.body.subcategory_1, req.body.subcategory_2, req.body.productstatus, req.body.saleprice, req.body.startingcity, req.body.destinationcity, req.body.productduration, homepagechecked],(err, result) => {
 		if (err) {
 			console.log(err);
 			res.render('error');

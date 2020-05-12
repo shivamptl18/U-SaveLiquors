@@ -36,6 +36,7 @@ var supplierRouter = require('./routes/supplier');
 var orderdetailRouter = require('./routes/orderdetail');
 var saleorderRouter = require('./routes/saleorder');
 var subscriptionRouter = require('./routes/subscription');
+var searchRouter = require('./routes/search');
 
 
 
@@ -65,8 +66,7 @@ app.use('/supplier', supplierRouter);
 app.use('/orderdetail', orderdetailRouter);
 app.use('/saleorder', saleorderRouter);
 app.use('/subscription', subscriptionRouter);
-
-
+app.use('/search', searchRouter);
 
 
 // catch 404 and forward to error handler
