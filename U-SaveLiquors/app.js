@@ -22,6 +22,11 @@ console.log("Unable to connect to database due to error: " + err);
 global.db = db;
 
 
+const cart = [];
+global.cart = cart;
+
+
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -37,7 +42,8 @@ var orderdetailRouter = require('./routes/orderdetail');
 var saleorderRouter = require('./routes/saleorder');
 var subscriptionRouter = require('./routes/subscription');
 var searchRouter = require('./routes/search');
-
+var reportRouter = require('./routes/report');
+var catalogRouter = require('./routes/catalog');
 
 
 var app = express();
@@ -67,6 +73,8 @@ app.use('/orderdetail', orderdetailRouter);
 app.use('/saleorder', saleorderRouter);
 app.use('/subscription', subscriptionRouter);
 app.use('/search', searchRouter);
+app.use('/report', reportRouter);
+app.use('/catalog', catalogRouter);
 
 
 // catch 404 and forward to error handler

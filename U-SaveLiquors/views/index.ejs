@@ -1,34 +1,44 @@
-<h1>Welcome To U-Save Liquor Mart!</h1>
-<p>Your One stop shop that covers all of your beverage needs!</p>
-<p>Choose from our wide ranged selection! </p>
- 
 
+<h1>Welcome to U-Save Liquor Mart!</h1>
 
+<p>Your one stop shop that covers all of your beverage needs!</p>
+<p>Choose from our wide ranged selection!</p>
 
-
-<% if (allrecs.length > 0) {%>
-  <% allrecs.forEach((recref, index) => { %>
-    <product>
-      <table> 
-      <tr>
-        <td><%= recref.productname %></td>
-        <td><%= recref.saleprice %></td>
-      </tr>
-      <tr>
-        <td><%= recref.productimage %></td>
-        <td><%= recref.productstatus %></td>
-      </tr>
-      <tr>
-        <td><%= recref.startingcity %></td>
-        <td><%= recref.destinationcity %></td>
-      </tr>
-      </table>
-          </product>
-      <% }); %>
-<% } %>
-
-      
-    
+<table width="100%"> <tr>
+	<td width="85%">
+		<% if (allrecs.length > 0) {%>
+			<% allrecs.forEach((recref, index) => { %>
+					<product>
+						<table> 
+						<tr>
+							<td><%= recref.productname %></td>
+							<td><%= recref.saleprice %></td>
+						</tr>
+						<tr>
+							<td><%= recref.productimage %></td>
+							<td><%= recref.productstatus %></td>
+						</tr>
+						<tr>
+							<td><%= recref.startingcity %></td>
+							<td><%= recref.destinationcity %></td>
+						</tr>
+						</table>
+					</product>
+				<% }); %>
+		<% } %>
+	</td>
+	
+	<td width="15%">
+		<% if (promos.length > 0) { %>
+			<% promos.forEach((promoref, index) => { %>
+				<img src="/images/<%= promoref.promoimage %>" width="150" height="200">
+			<% }); %>
+		
+		<% } %>
+		
+	</td>
+	
+</tr> </table>
        
   
 

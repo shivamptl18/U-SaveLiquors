@@ -1,0 +1,26 @@
+
+		<% if (allrecs.length > 0) {%>
+			<% allrecs.forEach((recref, index) => { %>
+					<product>
+						<table> 
+						<tr>
+							<td><%= recref.productname %></td>
+							<td><%= recref.saleprice %></td>
+						</tr>
+						<tr>
+							<td><%= recref.productimage %></td>
+							<td><%= recref.productstatus %></td>
+						</tr>
+						<tr>
+							<td><%= recref.startingcity %></td>
+							<td><%= recref.destinationcity %></td>
+						</tr>
+						<tr>
+							<td> INPUT CONTROL FOR QTY </td>
+							<td> <a href='/catalog/<%= recref.product_id %>/add'> Add To Cart</a></td>
+
+						</tr>
+						</table>
+					</product>
+				<% }); %>
+		<% } %>
