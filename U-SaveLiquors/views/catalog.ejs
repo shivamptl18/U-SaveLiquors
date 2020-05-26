@@ -1,26 +1,19 @@
+<% if (allrecs.length > 0) {%>
+	<% allrecs.forEach((recref, index) => { %>
+		<product>
+			<form action="/catalog/add" method="post" >
+			<input type="hidden" name="product_id" value=<%= recref.product_id %> > 
+					<b><%= recref.productname %></b><br/>
+					<b>Price: <%= recref.saleprice %> </b> <br/>
+					<center><img src="/images/<%= recref.productimage %>" height="100" width="100"></center> 					
+					<b>Starting City: </b><%= recref.startingcity %><br/>
+					<b>Destination City:</b> <%= recref.destinationcity %><br/>
+					<b>Availability Status: </b> <%= recref.productstatus %><br/>
+					<p> Quantity: <input type="text" name="qty" size="2" required>
+					<button type="submit" class="button1">Add to Cart</button> </p>
+			</form>
+		</product>
+	<% }); %>
+<% } %>
 
-		<% if (allrecs.length > 0) {%>
-			<% allrecs.forEach((recref, index) => { %>
-					<product>
-						<table> 
-						<tr>
-							<td><%= recref.productname %></td>
-							<td><%= recref.saleprice %></td>
-						</tr>
-						<tr>
-							<td><%= recref.productimage %></td>
-							<td><%= recref.productstatus %></td>
-						</tr>
-						<tr>
-							<td><%= recref.startingcity %></td>
-							<td><%= recref.destinationcity %></td>
-						</tr>
-						<tr>
-							<td> INPUT CONTROL FOR QTY </td>
-							<td> <a href='/catalog/<%= recref.product_id %>/add'> Add To Cart</a></td>
 
-						</tr>
-						</table>
-					</product>
-				<% }); %>
-		<% } %>

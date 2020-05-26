@@ -4,6 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var layouts = require('express-ejs-layouts');
+const session = require('express-session');
+
+
+
 const mariadb = require('mariadb/callback');
 const db = mariadb.createConnection({host: 'eagle.cdm.depaul.edu',
 user: 'spate313', password: 'spate313', 
@@ -22,8 +26,8 @@ console.log("Unable to connect to database due to error: " + err);
 global.db = db;
 
 
-const cart = [];
-global.cart = cart;
+//const cart = [];
+//global.cart = cart;
 
 
 
@@ -47,6 +51,13 @@ var catalogRouter = require('./routes/catalog');
 
 
 var app = express();
+
+app.use(session({secret: 'UsaveAppSecret'}));
+app.use(function(req,res,next){
+    res.locals.session = req.session;
+    next();
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
