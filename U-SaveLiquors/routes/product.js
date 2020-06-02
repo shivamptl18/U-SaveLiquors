@@ -1,10 +1,18 @@
 var express = require('express');
 var router = express.Router();
 
+function adminonly(req,res,next){ 
+	if (!req.session.isadmin) 
+		{return res.redirect('customer/login');}
+    next();
+}
+
+
+
 // ==================================================
 // Route to show empty form to obtain input form end-user.
 // ==================================================
-router.get('/addrecord', function(req, res, next) {
+router.get('/addrecord', adminonly, function(req, res, next) {
     let query = "SELECT category_id, categoryname FROM category"; 
 	// execute query
 	db.query(query, (err, result) => {
@@ -22,7 +30,7 @@ router.get('/addrecord', function(req, res, next) {
 // Route to list all records. Display view to list all records
 // ==================================================
 
-router.get('/', function(req, res, next) {
+router.get('/', adminonly, function(req, res, next) {
 let query = "SELECT product_id, productname, homepage, productimage, productstatus, saleprice, startingcity, destinationcity FROM product"; 
 
   // execute query
@@ -38,7 +46,7 @@ let query = "SELECT product_id, productname, homepage, productimage, productstat
 // ==================================================
 // Route to view one specific record. Notice the view is one record
 // ==================================================
-router.get('/:recordid', function(req, res, next) {
+router.get('/:recordid', adminonly, function(req, res, next) {
     let query = "SELECT product_id, productname, homepage, productimage, item_description, category_id, supplier_id, subcategory_1, subcategory_2, productstatus, saleprice, startingcity, destinationcity, productduration FROM product WHERE product_id = " + req.params.recordid; 
     
     // execute query
@@ -55,7 +63,7 @@ router.get('/:recordid', function(req, res, next) {
 // ==================================================
 // Route to obtain user input and save in database.
 // ==================================================
-router.post('/', function(req, res, next) {
+router.post('/', adminonly, function(req, res, next) {
 
     let insertquery = "INSERT INTO product (productname, productimage, item_description, category_id, supplier_id, subcategory_1, subcategory_2, productstatus, saleprice, startingcity, destinationcity, productduration, homepage) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"; 
 
@@ -81,7 +89,7 @@ router.post('/', function(req, res, next) {
 // ==================================================
 // Route to edit one specific record.
 // ==================================================
-router.get('/:recordid/edit', function(req, res, next) {
+router.get('/:recordid/edit', adminonly, function(req, res, next) {
     let query = "SELECT product_id, productname, homepage, productimage, item_description, category_id, supplier_id, subcategory_1, subcategory_2, productstatus, saleprice, startingcity, destinationcity, productduration FROM product WHERE product_id = " + req.params.recordid;  
     
       // execute query
@@ -108,7 +116,7 @@ router.get('/:recordid/edit', function(req, res, next) {
 // ==================================================
 // Route to save edited data in database.
 // ==================================================
-router.post('/save', function(req, res, next) {
+router.post('/save', adminonly, function(req, res, next) {
     let updatequery = "UPDATE product SET productname = ?, productimage = ?, item_description = ?, category_id = ?, supplier_id = ?, subcategory_1 = ?, subcategory_2 = ?, productstatus = ?, saleprice = ?, startingcity = ?, destinationcity = ?, productduration = ?, homepage = ? WHERE product_id = " + req.body.product_id; 
     
     var homepagechecked = false;
@@ -134,7 +142,7 @@ router.post('/save', function(req, res, next) {
 // ==================================================
 // Route to delete one specific record.
 // ==================================================
-router.get('/:recordid/delete', function(req, res, next) {
+router.get('/:recordid/delete', adminonly, function(req, res, next) {
     let query = "DELETE FROM product WHERE product_id = " + req.params.recordid;  
     
       // execute query
