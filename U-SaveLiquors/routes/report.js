@@ -1,9 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
+
+function adminonly(req,res,next){ 
+	if (!req.session.isadmin) 
+		{return res.redirect('customer/login');}
+    next();
+}
+
 /* GET report page. */
 // http://localhost:3002/report
-router.get('/', function(req, res, next) {
+router.get('/', adminonly, function(req, res, next) {
   res.render('report/reportmenu');
 });
 
@@ -13,7 +20,7 @@ router.get('/', function(req, res, next) {
 // Route to list all records. Display view to list all records
 // http://localhost:3002/report/allcustomers 
 // ==================================================
-router.get('/allcustomers', function(req, res, next) {
+router.get('/allcustomers', adminonly, function(req, res, next) {
 
 let query = "SELECT customer_id, firstname, lastname, city, state FROM customer"; 
 
@@ -34,7 +41,7 @@ let query = "SELECT customer_id, firstname, lastname, city, state FROM customer"
 // Route to list all records. Display view to list all records
 // http://localhost:3002/report/allproducts
 // ==================================================
-router.get('/allproducts', function(req, res, next) {
+router.get('/allproducts', adminonly, function(req, res, next) {
 
   let query = "SELECT product_id, productname, homepage, productimage, productstatus, saleprice, startingcity, destinationcity FROM product"; 
 
@@ -55,7 +62,7 @@ router.get('/allproducts', function(req, res, next) {
 // Route to list all records. Display view to list all records
 // http://localhost:3002/report/allsales
 // ==================================================
-router.get('/allsales', function(req, res, next) {
+router.get('/allsales', adminonly, function(req, res, next) {
 
 let query = "SELECT order_id, customer_id, saledate, customernotes, paymentstatus FROM saleorder"; 
 
