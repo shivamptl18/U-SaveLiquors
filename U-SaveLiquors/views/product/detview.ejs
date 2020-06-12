@@ -1,0 +1,77 @@
+<table width="100%">
+	<tr><td width="70%">
+		<h1> Product Details </h1>
+		<table>
+			<tr> <td> Product Name: </td> <td> <%= onerec.productname %> </td> </tr>
+			<tr> <td> Image: </td> <td> <img src="/images/<%= onerec.productimage %>" height="100" width="100"> </td> </tr>
+			<tr> <td> Description: </td> <td> <%= onerec.item_description %> </td> </tr>
+			<tr> <td> Status: </td> <td> <%= onerec.productstatus %> </td> </tr>
+			<tr> <td> Sale Price: </td> <td> <%= Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(onerec.saleprice) %> </td> </tr>
+			<tr> <td> Starting City: </td> <td> <%= onerec.startingcity %> </td> </tr>
+			<tr> <td> Destination City: </td> <td> <%= onerec.destinationcity %> </td> </tr>
+			<tr> <td> Duration: </td> <td> <%= onerec.productduration %> </td> </tr>
+		</table>
+		&nbsp; <br/>
+			<form action="/catalog/add" method="post" >
+				<input type="hidden" name="product_id" value=<%= onerec.product_id %> > 
+				<p> Quantity: <input type="text" name="qty" size="2" required>
+				<button type="submit" class="button1">Add to Cart</button> </p>
+			</form>
+	</td>
+
+	<td width="30%">
+		<h3>Write a new review....</h3>
+		<form action="/review" method="post">
+		   <table>
+				<input type="hidden" name="customer_id" value="<%= session.customer_id %>"	> 
+				<input type="hidden" name="product_id" value="<%= onerec.product_id %>" > 
+				<input type="hidden" name="reviewdate" value="<%= Date.now(); %>" > 
+				<tr> <td> Comments: </td> <td> <textarea name="comments">Comments </textarea> </td> </tr>
+				<tr> <td> Rating: </td> <td> 
+									<input type="radio" name="rating" value="1">★ <br/> 
+									<input type="radio" name="rating" value="2">★★ <br/>
+									<input type="radio" name="rating" value="3">★★★ <br/>
+									<input type="radio" name="rating" value="4">★★★★ <br/>
+									<input type="radio" name="rating" value="5" checked="true" >★★★★★<br/>
+				</td> </tr>
+				<input type="hidden" name="status" value="hide" required>
+		   </table>
+		   <button type="submit">Save</button>
+		</form>
+	</td>
+</tr></table>
+<hr>
+<h3>Reviews from customers on this product</h3>
+
+<% if (reviews.length > 0) {%>
+		<table>
+			<tr>
+				<th>Comments</th>
+				<th>Rating</th>
+			</tr>
+      	<% reviews.forEach((recref, index) => { %>
+			<tr>
+				<td><%= recref.comments %></td>
+				<td><%= recref.rating %></td>
+            </tr>
+        <% }); %>
+		</table>
+
+<% } else { %>
+        <p>Not Reviews Available</p>
+<% } %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

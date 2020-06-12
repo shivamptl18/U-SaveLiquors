@@ -7,31 +7,27 @@
 <hr>
 
 <% if (allrecs.length > 0) {%>
-		<table border=1>
-			<tr>
-				<th>Product Name</th>
-				<th>Product Image</th>
-				<th>Product Status</th>
-				<th>Sale Price </th>
-				<th>Starting City</th>
-				<th>Destination City</th>
-			</tr>
-      	<% allrecs.forEach((recref, index) => { %>
-			<tr>
-				<td><%= recref.productname %></td>
-				<td><img src="/images/<%= recref.productimage %>" height="100" width="100"></td>
-				<td><%= recref.productstatus %></td>
-				<td><%= Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(recref.saleprice) %></td>
-				<td><%= recref.startingcity %></td>
-				<td><%= recref.destinationcity %></td>
-				<td><a href='/product/<%= recref.product_id %>'> Details</a></td>
-                </tr>
-        <% }); %>
-		</table>
 
-        <% } else { %>
-            <p>Not Records Available</p>
-        <% } %>
+	<% allrecs.forEach((recref, index) => { %>
+  <product>
+	  <form action="/catalog/add" method="post" >
+	  <input type="hidden" name="product_id" value=<%= recref.product_id %> > 
+			  <b><%= recref.productname %></b><br/>
+			  <b>Price: <%= Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(recref.saleprice) %> </b> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+			  <a href="/product/<%= recref.product_id %>/view">More...</a> <br/>
+			  <center><img src="/images/<%= recref.productimage %>" height="100" width="100"></center> 					
+			  <b>Starting City: </b><%= recref.startingcity %><br/>
+			  <b>Destination City:</b> <%= recref.destinationcity %><br/>
+			  <b>Availability Status: </b> <%= recref.productstatus %><br/>
+			  <p> Quantity: <input type="text" name="qty" size="2" required>
+			  <button type="submit" class="button1">Add to Cart</button> </p>
+	  </form>
+  </product>
+  <% }); %>
+
+  <% } else { %>
+	  <p>Not Records Available</p>
+  <% } %>
 		
 
 

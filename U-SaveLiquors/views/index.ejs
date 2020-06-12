@@ -12,7 +12,8 @@
 				<form action="/catalog/add" method="post" >
 				<input type="hidden" name="product_id" value=<%= recref.product_id %> > 
 						<b><%= recref.productname %></b><br/>
-						<b>Price: <%= Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(recref.saleprice) %> </b> <br/>
+						<b>Price: <%= Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(recref.saleprice) %> </b> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+						<a href="/product/<%= recref.product_id %>/view">More...</a> <br/>
 						<center><img src="/images/<%= recref.productimage %>" height="100" width="100"></center> 					
 						<b>Starting City: </b><%= recref.startingcity %><br/>
 						<b>Destination City:</b> <%= recref.destinationcity %><br/>

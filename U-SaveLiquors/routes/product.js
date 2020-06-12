@@ -43,8 +43,44 @@ let query = "SELECT product_id, productname, homepage, productimage, productstat
  	});
 });
 
+
 // ==================================================
 // Route to view one specific record. Notice the view is one record
+// Customer view
+// URL: http://localhost:3002/package/10/view
+// ==================================================
+router.get('/:recordid/view', function(req, res, next) {
+
+	let query = "SELECT product_id, productname, homepage, productimage, item_description, category_id, supplier_id, subcategory_1, subcategory_2,productstatus, saleprice, startingcity, destinationcity, productduration FROM product WHERE product_id = " + req.params.recordid; 
+
+	// execute query
+	db.query(query, (err, result) => {
+		if (err) {
+			console.log(err);
+			res.render('error');
+		} else {
+	
+			let query = "SELECT review_id, customer_id, product_id, reviewdate, comments, rating, productstatus FROM review WHERE product_id = " + req.params.recordid; 
+
+			// execute query
+			db.query(query, (err, reviews) => {
+				if (err) {
+					console.log(err);
+					res.render('error');
+				} else {
+				res.render('product/detview', {onerec: result[0], reviews: reviews });
+				} 
+			});
+		} 
+	});
+});
+
+
+
+
+// ==================================================
+// Route to view one specific record. Notice the view is one record
+// Administrator View
 // ==================================================
 router.get('/:recordid', adminonly, function(req, res, next) {
     let query = "SELECT product_id, productname, homepage, productimage, item_description, category_id, supplier_id, subcategory_1, subcategory_2, productstatus, saleprice, startingcity, destinationcity, productduration FROM product WHERE product_id = " + req.params.recordid; 
