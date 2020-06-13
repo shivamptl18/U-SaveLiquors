@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-
 function adminonly(req,res,next){ 
 	if (!req.session.isadmin) 
 		{return res.redirect('customer/login');}
     next();
 }
+
 
 // ==================================================
 // Route to show empty form to obtain input form end-user.
@@ -54,18 +54,24 @@ router.get('/:recordid', adminonly, function(req, res, next) {
 // ==================================================
 // Route to obtain user input and save in database.
 // ==================================================
-router.post('/', adminonly, function(req, res, next) {
+router.post('/', function(req, res, next) {
 
-	let insertquery = "INSERT INTO review (customer_id, product_id, reviewdate, comments, rating, productstatus) VALUES (?, ?, ?, ?, ?, ?)"; 
+	if (req.body.customer_id <= 0)
+		{
+		res.redirect('customer/login');
+		} else {
+			
+		let insertquery = "INSERT INTO review (customer_id, product_id, reviewdate, comments, rating, productstatus) VALUES (?, ?, ?, ?, ?, ?)"; 
 
-	db.query(insertquery,[req.body.customer_id, req.body.product_id, req.body.reviewdate, req.body.comments, req.body.rating, req.body.productstatus],(err, result) => {
-		if (err) {
-			console.log(err);
-			res.render('error');
-			} else {
-			res.redirect('/review');
-			}
-		});
+		db.query(insertquery,[req.body.customer_id, req.body.product_id, req.body.reviewdate, req.body.comments, req.body.rating, req.body.productstatus],(err, result) => {
+			if (err) {
+				console.log(err);
+				res.render('error');
+				} else {
+				res.redirect('/');
+				}
+			});
+		}
 });
 
 
