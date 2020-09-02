@@ -1,0 +1,65 @@
+BEGIN:VCALENDAR
+PRODID:-//zoom.us//iCalendar Event//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+CLASS:PUBLIC
+BEGIN:VTIMEZONE
+TZID:America/Chicago
+TZURL:http://tzurl.org/zoneinfo-outlook/America/Chicago
+X-LIC-LOCATION:America/Chicago
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0600
+TZOFFSETTO:-0500
+TZNAME:CDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0600
+TZNAME:CST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTAMP:20200616T195750Z
+DTSTART;TZID=America/Chicago:20200616T150000
+DTEND;TZID=America/Chicago:20200616T180000
+SUMMARY:CSC 300 / 402 - DATA STRUCTURES I
+RRULE:FREQ=WEEKLY;WKST=SU;UNTIL=20200716T230000;INTERVAL=1;BYDAY=TU,TH
+UID:ZOOM92929439103
+TZID:America/Chicago
+DESCRIPTION:Hi there\, \n\nDavid Zaretsky is inviting you to a scheduled 
+ Zoom meeting. \n\nJoin from PC\, Mac\, Linux\, iOS or Android: https://d
+ epaul.zoom.us/w/92929439103?tk=So2FCZ24v8pSocBQFzpwc63009NuRQm-jcdmnGVtL
+ 0M.DQIAAAAVowa1fxZVaTVybkZKNFM1ZTcxUUdvWHluOWtnAAAAAAAAAAAAAAAAAAAAAAAAA
+ AAA\n    Password: CSC300\n\nOr iPhone one-tap :\n    US: +13126266799\,
+ \,92929439103#  or +13017158592\,\,92929439103# \nOr Telephone:\n    Dia
+ l(for higher quality\, dial a number based on your current location): \n
+         US: +1 312 626 6799  or +1 301 715 8592  or +1 470 250 9358  or 
+ +1 470 381 2552  or +1 646 518 9805  or +1 646 876 9923  or +1 651 372 8
+ 299  or +1 786 635 1003  or +1 267 831 0333  or +1 253 215 8782  or +1 3
+ 46 248 7799  or +1 602 753 0140  or +1 669 219 2599  or +1 669 900 6833 
+  or +1 720 928 9299  or +1 971 247 1195  or +1 213 338 8477 \n    Meetin
+ g ID: 929 2943 9103\n    International numbers available: https://depaul
+ .zoom.us/u/aeDlkR9Qwf\n\nOr an H.323/SIP room system (e.g. Polycom):\n  
+   H.323: \n        162.255.37.11 (US West)\n        162.255.36.11 (US Ea
+ st)\n        221.122.88.195 (China)\n        115.114.131.7 (India Mumbai
+ )\n        115.114.115.7 (India Hyderabad)\n        213.19.144.110 (EMEA
+ )\n        103.122.166.55 (Australia)\n        209.9.211.110 (Hong Kong 
+ SAR)\n        64.211.144.160 (Brazil)\n        69.174.57.160 (Canada)\n 
+        207.226.132.110 (Japan)\n    Meeting ID: 929 2943 9103\n    Passw
+ ord: 416817\n\n    SIP: 92929439103@zoomcrc.com\n    Password: 416817\n\
+ n\n
+LOCATION:https://depaul.zoom.us/w/92929439103?tk=So2FCZ24v8pSocBQFzpwc630
+ 09NuRQm-jcdmnGVtL0M.DQIAAAAVowa1fxZVaTVybkZKNFM1ZTcxUUdvWHluOWtnAAAAAAAA
+ AAAAAAAAAAAAAAAAAAAA
+BEGIN:VALARM
+TRIGGER:-PT10M
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR
