@@ -49,6 +49,7 @@ var subscriptionRouter = require('./routes/subscription');
 var searchRouter = require('./routes/search');
 var reportRouter = require('./routes/report');
 var catalogRouter = require('./routes/catalog');
+var browseCatagory = require('./routes/browse');
 
 
 var app = express();
@@ -88,6 +89,7 @@ app.use('/subscription', subscriptionRouter);
 app.use('/search', searchRouter);
 app.use('/report', reportRouter);
 app.use('/catalog', catalogRouter);
+app.use('/browse', browseCatagory);
 
 
 // catch 404 and forward to error handler
