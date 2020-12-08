@@ -1,8 +1,10 @@
+
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <table bgcolor='lightgrey' width='100%'> <tr>
         <td width='20%' align='left'>
-            <a href="/"><img src="/images/store.png" width="150" height="100"></a></td> 
-        <td width='60%' align='center'><img src="/images/logo2.png"></td>
+            <a href="/"><img src="/images/store.png" width="150" height="100" style="border: 0cm;"></a></td> 
+        <td width='60%' align='center'><img src="/images/logo2.png" style="border: 0cm;"></td>
         <td width='10%' align='center'>
                     <% if(session.customer_id > 0) { %>
                             <b> Hello <b> <%= session.custname %>! </b> </br>
@@ -10,12 +12,16 @@
                             <a href='/customer/logout'>Logout</a> 
                             
                     <% } else { %>
-                            <a href='/customer/register'>New Customer</a> </br>
-                            <a href='/customer/login'>Login</a> 
+                            <ul class="nav navbar-nav navbar-right">
+                              <li><a href="/customer/register"><span class="fa fa-user-circle-o" style="font-size: 15px;"></span> Sign Up</a></li> 
+                              <li><a href="/customer/login"><span class="fa fa-sign-in" style="font-size: 15px"></span> Login</a></li>
+                            </ul>
+                            <!--<a href='/customer/register'>New Customer</a> </br>
+                            <a href='/customer/login'>Login</a> -->
                     <% } %>	
             
         </td>
-        <td width='10%' align='center'><a href="/catalog/cart"><img src='/images/cart.png' height="24" width="24"/></a></td>
+        <td width='10%' align='center'><a href="/catalog/cart"><img src='/images/cart.png' height="24" width="24" style="border: 0cm;"/></a></td>
         </tr></table>
 
          <!-- Search Bar -->
@@ -28,6 +34,7 @@
             <button><i class="fa fa-search"></i></button>
           </form>-->
     
+        
 
     <table width="100%"><tr bgcolor="#f0f3f5">
         <td width="100%">
@@ -66,4 +73,6 @@
 		</td>
 	<% } %>
  </table>
+
+
    
