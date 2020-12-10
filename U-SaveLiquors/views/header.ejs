@@ -8,8 +8,8 @@
         <td width='10%' align='center'>
                     <% if(session.customer_id > 0) { %>
                             <b><span class="fa fa-user-circle-o" style="font-size: 15px;"></span> Hello <b> <%= session.custname %>! </b> </br>
-                            <a href="/customer/<%= session.customer_id %>/change">Update Profile</a> </b><br>
-                            <a href='/customer/logout'>Logout</a> 
+                            <span class="fa fa-edit" style="font-size: 15px;"></span><a href="/customer/<%= session.customer_id %>/change">Update Profile</a> </b><br>
+                            <span class="fa fa-sign-out" style="font-size: 15px;"></span><a href='/customer/logout'>Logout</a> 
                             
                     <% } else { %>
                             <ul class="nav navbar-nav navbar-right">
@@ -21,7 +21,7 @@
                     <% } %>	
             
         </td>
-        <td width='10%' align='center'><a href="/catalog/cart"><img src='/images/cart.png' height="24" width="24" style="border: 0cm;"/></a></td>
+        <td width='10%' align='center'><a href="/catalog/cart"><img src='/images/cart.png' height="24" width="24"  style="border: 0cm;"/></a></td>
         </tr></table>
 
          <!-- Search Bar -->
