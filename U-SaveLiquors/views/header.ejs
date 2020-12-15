@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">-->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</head>
+
+
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -38,13 +50,58 @@
 
     <table width="100%"><tr bgcolor="#f0f3f5">
         <td width="100%">
-    <!-- Top Nav -->
+
+       
+        
+           
+    <!-- Top Nav 
     <ul>
     <li> <a href="/">Home</a> </li>
     <li> <a href="/about">About Us</a> </li>
-    <li> <a href="/catalog">Catalog</a> </li>
-    <li> <a href="/contact">Contact Us</a> </li>
     <li> <a href="/browse">Browse Catagories</a> </li>
+    <li> <a href="/catalog">Catalog</a> </li>
+    <li> <a href="/contact">Contact Us</a> </li>-->
+
+
+
+
+   
+    <div class="topnav" id="myTopnav">
+        <a href="/" class="active">Home</a>
+        <a href="/about">About</a>
+        <div class="dropdowns">
+          <button class="dropbtn">Browse
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdowns-content">
+            <a href="/catalog">Catalog</a>
+            <a href="/beer">Beer</a>
+            <a href="/liquor">Spirits & Alcohol</a>
+            <a href="/wine">Wine</a>
+            <a href="/beverages">Beverages</a>
+          </div>
+        </div>
+        <a href="/contact">Contact</a>
+        <a href="#about">Link</a>
+        
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+
+      </div>
+
+      <script>
+        function myFunction() {
+          var x = document.getElementById("myTopnav");
+          if (x.className === "topnav") {
+            x.className += " responsive";
+          } else {
+            x.className = "topnav";
+          }
+        }</script>
+
+        
+    
+    
+    
      <!-- Search Bar -->
     <div class="search-container">
         <form action="/search" method="post" style="text-align:right">
@@ -75,4 +132,3 @@
  </table>
 
 
-   

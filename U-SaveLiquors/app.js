@@ -50,6 +50,10 @@ var searchRouter = require('./routes/search');
 var reportRouter = require('./routes/report');
 var catalogRouter = require('./routes/catalog');
 var browseCatagory = require('./routes/browse');
+var beerCatagory = require('./routes/beer');
+var liquorCatagory = require('./routes/liquor');
+var wineCatagory = require('./routes/wine');
+var beveragesCatagory = require('./routes/beverages');
 
 
 var app = express();
@@ -90,6 +94,10 @@ app.use('/search', searchRouter);
 app.use('/report', reportRouter);
 app.use('/catalog', catalogRouter);
 app.use('/browse', browseCatagory);
+app.use('/beer', beerCatagory);
+app.use('/liquor', liquorCatagory);
+app.use('/wine', wineCatagory);
+app.use('/beverages', beveragesCatagory);
 
 
 // catch 404 and forward to error handler
