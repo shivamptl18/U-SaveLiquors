@@ -25,58 +25,107 @@
       </div>
 
 
+			<section class="openinghours">
+				<div class="openinghourscontent section">
+					<div class="header">
+						<h2>Store Hours</h2>
+						<span id="open-status"><small class="openorclosed">We are</small></span>
+			
+					</div>
+					<table class="opening-hours-table">
+						<tr id="Monday" itemprop="openingHours" title="Open Monday at 10am to 9pm">
+							<td>Monday</td>
+							<td class="opens">10:00AM</td>
+							<td>-</td>
+							<td class="closes">21:00PM</td>
+						</tr>
+						<tr id="Tuesday" itemprop="openingHours" title="Open Tuesday at 10am to 9pm">
+							<td>Tuesday</td>
+							<td class="opens">10:00AM</td>
+							<td>-</td>
+							<td class="closes">21:00PM</td>
+						</tr>
+						<tr id="Wednesday" itemprop="openingHours" title="Open Wednesday at 10am to 9pm">
+							<td>Wednesday</td>
+							<td class="opens">10:00AM</td>
+							<td>-</td>
+							<td class="closes">21:00PM</td>
+						</tr>
+						<tr id="Thursday" itemprop="openingHours" title="Open Thursday at 10am to 9pm">
+							<td>Thursday</td>
+							<td class="opens">10:00AM</td>
+							<td>-</td>
+							<td class="closes">21:00PM</td>
+						</tr>
+						<tr id="Friday" itemprop="openingHours" title="Open Friday at 10am to 9pm">
+							<td>Friday</td>
+							<td class="opens">10:00AM</td>
+							<td>-</td>
+							<td class="closes">21:00PM</td>
+						</tr>
+						<tr id="Saturday" itemprop="openingHours" title="Open Saturday at 10am to 9pm">
+							<td>Saturday</td>
+							<td class="opens">10:00AM</td>
+							<td>-</td>
+							<td class="closes">21:00PM</td>
+						</tr>
+						<tr id="Sunday" itemprop="openingHours" title="Open Sunday at 10am to 8pm">
+							<td>Sunday</td>
+							<td class="opens">10:00AM</td>
+							<td>-</td>
+							<td class="closes">20:00PM</td>
+						</tr>
+					</table>
 
-      <div class="row">
-			  <div class="col-6">
-				  <h5 class="text-dark">Store Hours</h5>
-				  <ul class="list-group">
-					   
-													<li class="list-group-item">
-								<div class="row">
-									<div class="col-6">Sunday</div>
-									<div class="col-6">10:00 AM - 08:00 PM</div>
-								</div>
-							</li>
-													<li class="list-group-item">
-								<div class="row">
-									<div class="col-6">Monday</div>
-									<div class="col-6">09:00 AM - 09:00 PM</div>
-								</div>
-							</li>
-													<li class="list-group-item">
-								<div class="row">
-									<div class="col-6">Tuesday</div>
-									<div class="col-6">09:00 AM - 09:00 PM</div>
-								</div>
-							</li>
-													<li class="list-group-item">
-								<div class="row">
-									<div class="col-6">Wednesday</div>
-									<div class="col-6">09:00 AM - 09:00 PM</div>
-								</div>
-							</li>
-													<li class="list-group-item">
-								<div class="row">
-									<div class="col-6">Thursday</div>
-									<div class="col-6">09:00 AM - 09:00 PM</div>
-								</div>
-							</li>
-													<li class="list-group-item">
-								<div class="row">
-									<div class="col-6">Friday</div>
-									<div class="col-6">09:00 AM - 10:00 PM</div>
-								</div>
-							</li>
-													<li class="list-group-item">
-								<div class="row">
-									<div class="col-6">Saturday</div>
-									<div class="col-6">09:00 AM - 10:00 PM</div>
-								</div>
-							</li>
-											  				  </ul>
-			  </div>
+				</div>
+			</section>
 
 
-  
+			<script>var currentDate = new Date();
+				var weekday = [];
+				weekday[0] = "Sunday";
+				weekday[1] = "Monday";
+				weekday[2] = "Tuesday";
+				weekday[3] = "Wednesday";
+				weekday[4] = "Thursday";
+				weekday[5] = "Friday";
+				weekday[6] = "Saturday";
+				
+				var currentDay = weekday[currentDate.getDay()];
+				
+				var currentTimeHours = currentDate.getHours();
+				currentTimeHours = currentTimeHours < 10 ? "0" + currentTimeHours : currentTimeHours;
+				var currentTimeMinutes = currentDate.getMinutes();
+				var timeNow = currentTimeHours + "" + currentTimeMinutes;
+				
+				var currentDayID = "#" + currentDay; //gets todays weekday and turns it into id
+				$(currentDayID).toggleClass("today"); //this works at hightlighting today
+				
+				var openTimeSplit = $(currentDayID).children('.opens').text().split(":");
+				
+				var openTimeHours = openTimeSplit[0];
+				openTimeHours = openTimeHours < 10 ? "0" + openTimeHours : openTimeHours;
+				
+				var openTimeMinutes = openTimeSplit[1];
+				var openTimex = openTimeSplit[0] + openTimeSplit[1];
+				
+				var closeTimeSplit = $(currentDayID).children('.closes').text().split(":");
+				
+				var closeTimeHours = closeTimeSplit[0];
+				closeTimeHours = closeTimeHours < 10 ? "0" + closeTimeHours : closeTimeHours;
+				
+				var closeTimeMinutes = closeTimeSplit[1];
+				var closeTimex = closeTimeSplit[0] + closeTimeSplit[1];
+				
+				if (timeNow >= openTimex && timeNow <= closeTimex) {
+					$(".openorclosed").toggleClass("open");
+				} else {
+					$(".openorclosed").toggleClass("closed");
+				}</script>
+
+			  
+
+
   </body>
+ 
 </html>
